@@ -1,0 +1,15 @@
+[Unit]
+Description=echo-headers
+
+[Service]
+WorkingDirectory=/
+SyslogIdentifier=echo-headers
+
+ExecStart=/usr/bin/python3 /opt/echo-headers/echo-headers.py --port 80
+
+Restart=always
+# Sleep between restarts. Some GCE APIs have quotas per 100s so too fast restarts can keep failing
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target
